@@ -14,6 +14,8 @@ cat ~/path/to/AccountActivity.xls | coffee mizrachi-parse.coffee checking > Acco
 * Issues / TODO
 - [ ] mizrahi's checking mode export date is ambiguous. As a result, GnuCash will prompt what format the file could be used for.
 - [ ] when importing exports with overlapping date ranges, the burden of deduplication falls upon GnuCash. we could make it easier by allowing to provide date range arguments for the QIF exported data.
-  
+* ייבוא של קבצי אקסל מאתר האינטרנט של בנק מזרחי טפחות 
+- הופך קבצי אקסל ל .qif
+- מאפשר לייבאם לתוך GnuCash או Quicken
 
 
