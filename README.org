@@ -1,5 +1,6 @@
 * mizrahi-tefahot.co.il .xls exporter to .qif
 If you happen to be a customer of this bank, and you'd like to export, save and manipulate your financial data using something like Quicken or GnuCash - this package is for you.
+This has been tested and found to work with Mizrahi exported files from June 2015, and imported with GnuCash 2.6.1
 * Installation
 run "npm install". this is expected to setup dependencies (coffee-script, qif, cheerio).
 * Usage
@@ -10,6 +11,9 @@ run "npm install". this is expected to setup dependencies (coffee-script, qif, c
 #+BEGIN_EXAMPLE
 cat ~/path/to/AccountActivity.xls | coffee mizrachi-parse.coffee checking > AccountActivity.qif
 #+END_EXAMPLE
-
+* Issues / TODO
+- [ ] mizrahi's checking mode export date is ambiguous. As a result, GnuCash will prompt what format the file could be used for.
+- [ ] when importing exports with overlapping date ranges, the burden of deduplication falls upon GnuCash. we could make it easier by allowing to provide date range arguments for the QIF exported data.
+  
 
 
