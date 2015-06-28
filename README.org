@@ -8,7 +8,7 @@ run "npm install". this is expected to setup dependencies (coffee-script, qif, c
 3. import the .qif file in GnuCash or whatever it is that you use.
 * Example
 #+BEGIN_EXAMPLE
-cat ~/path/to/AccountActivity.xls | ~/Projects/mizrahi2qif/mizrachi-parse.coffee checking > AccountActivity.qif
+cat ~/path/to/AccountActivity.xls | coffee mizrachi-parse.coffee checking > AccountActivity.qif
 #+END_EXAMPLE
 
 
