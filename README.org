@@ -3,11 +3,13 @@ If you happen to be a customer of this bank, and you'd like to export, save and 
 * Installation
 run "npm install". this is expected to setup dependencies (coffee-script, qif, cheerio).
 * Usage
-** login to mizrahi-tefahot.co.il and export the data you'd like to work with in .xls format.
-** pipe the exported file(s) into the conversion utility. Be sure to specify either "checking" or "credit" as an argument to the importer, depending on the file type. Pipe the output to your destination file
+1. login to mizrahi-tefahot.co.il and export the data you'd like to work with in .xls format.
+2. pipe the exported file(s) into the conversion utility. Be sure to specify either "checking" or "credit" as an argument to the importer, depending on the file type. Pipe the output to your destination file
+3. import the .qif file in GnuCash or whatever it is that you use.
+* Example
 #+BEGIN_EXAMPLE
 cat ~/path/to/AccountActivity.xls | ~/Projects/mizrahi2qif/mizrachi-parse.coffee checking > AccountActivity.qif
 #+END_EXAMPLE
-** import the .qif file in GnuCash or whatever it is that you use.
+
 
 
