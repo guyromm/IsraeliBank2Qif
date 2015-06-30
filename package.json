@@ -1,8 +1,8 @@
 {
-  "name": "mizrahi2qif",
+  "name": "ilbank2qif",
   "version": "0.0.0",
-  "description": "mizrahi-tefahot.co.il exported files sto .qif converter",
-  "main": "mizrachi-parse.coffee",
+  "description": "mizrahi-tefahot.co.il , bankhapoalim.co.il & isracard.co.il exported .xls files to .qif converter",
+  "main": "xls2qif.coffee",
   "dependencies": {
     "cheerio": "~0.19.0",
     "qif": "0.0.2",
@@ -14,10 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/guyromm/Mizrahi2Qif.git"
+    "url": "https://github.com/guyromm/IsraeliBank2Qif.git"
   },
   "keywords": [
     "mizrahi",
+    "hapoalim",
+    "isracard",
     "qif",
     "xls",
     "export",
@@ -26,6 +28,6 @@
   "author": "Guy Romm",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/guyromm/Mizrahi2Qif/issues"
+    "url": "https://github.com/guyromm/IsraeliBank2Qif/issues"
   }
 }
