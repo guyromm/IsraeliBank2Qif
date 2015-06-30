@@ -13,7 +13,7 @@ run "npm install". this is expected to setup dependencies (coffee-script, qif, c
 3. import the .qif file in GnuCash or whatever it is that you use.
 * Example
 #+BEGIN_EXAMPLE
-cat ~/path/to/AccountActivity.xls | coffee mizrachi-parse.coffee checking > AccountActivity.qif
+cat ~/path/to/AccountActivity.xls | coffee xls2qif.coffee mizrahi-checking > AccountActivity.qif
 #+END_EXAMPLE
 * Issues / TODO
 - [ ] mizrahi's checking mode export date is ambiguous. As a result, GnuCash will prompt what format the file could be used for.
