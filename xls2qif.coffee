@@ -5,7 +5,7 @@ l = console.log
 
 mode = process.argv[2]
 allowed_modes = ['mizrahi-checking','mizrahi-credit','poalim-checking','isracard']
-if mode not in allowed_modes then throw "must specify mode, one of "+allowed_modes
+if mode not in allowed_modes then throw "- must specify mode, one of "+allowed_modes+".\n- use stdin for input.\n- in case of poalim and isracard please use iconv -f iso8859-8, since nodejs does not natively support this encoding (yet)\n- example: $ cat /path/to/isracard/2015-05.xls |  iconv -f iso8859-8 | ./xls2qif.coffee isracard > isracard-2015-05.qif"  
 datergs =
         'mizrahi-credit':new RegExp '^([0-9]{4})\-([0-9]{2})\-([0-9]{2})$'
         'mizrahi-checking':new RegExp '^([0-9]{2})/([0-9]{2})/([0-9]{2})$'
