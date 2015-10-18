@@ -4,15 +4,19 @@ qif = require 'qif'
 l = console.log
 
 mode = process.argv[2]
-allowed_modes = ['mizrahi-checking','mizrahi-credit','poalim-checking','isracard']
+allowed_modes = ['mizrahi-checking','mizrahi-credit','poalim-checking','isracard','leumi-checking','leumi-credit']
 if mode not in allowed_modes then throw "- must specify mode, one of "+allowed_modes+".\n- use stdin for input.\n- in case of poalim and isracard please use iconv -f iso8859-8, since nodejs does not natively support this encoding (yet)\n- example: $ cat /path/to/isracard/2015-05.xls |  iconv -f iso8859-8 | ./xls2qif.coffee isracard > isracard-2015-05.qif"  
 datergs =
         'mizrahi-credit':new RegExp '^([0-9]{4})\-([0-9]{2})\-([0-9]{2})$'
         'mizrahi-checking':new RegExp '^([0-9]{2})/([0-9]{2})/([0-9]{2})$'
         'poalim-checking': '^([0-9]{2})/([0-9]{2})/([0-9]{4})$'
         'isracard': '^([0-9]{2})/([0-9]{2})/([0-9]{4})$'
+        'leumi-checking': '^([0-9]{2})/([0-9]{2})/([0-9]{2})$'
+        'leumi-credit': '^([0-9]{2})/([0-9]{2})/([0-9]{2})$'
 codings =
         'mizrahi-checking':'ucs-2'
+        'leumi-checking':'utf-8'
+        'leumi-credit':'utf-8'
         'mizrahi-credit':'ucs-2'
         'poalim-checking':'utf-8' #wrong! iso8859-8. convert yourself.
         'isracard':'utf-8' #wrong! iso8859-8. convert yourself.
@@ -25,6 +29,15 @@ process.stdin.on 'readable', ->
         if chunk != null
                 cstr = chunk.toString()
                 returned+=cstr
+leumi_trans =
+        0: 'date'
+        1: 'payee'
+        2: 'checknumber'
+        3: 'withdrawal_amount'
+        4: 'deposit_amount'
+        5: 'balance'
+
+
 credit_trans =
         0: 'date'
         1: 'payee'
@@ -64,11 +77,20 @@ isracard_abroad_trans =
         6: 'charge_currency'
         7: 'amount'
         8: 'checknumber'
+leumi_credit_trans =
+        1: 'date'
+#        1: 'purchase_date'
+        2: 'payee'
+        6: 'local_amount'
+        4: 'amount'
 trans =
         "mizrahi-credit":credit_trans
         "mizrahi-checking":checking_trans
         "poalim-checking":poalim_checking_trans
+        "leumi-checking":leumi_trans
+        "leumi-credit": leumi_credit_trans
         "isracard":isracard_trans
+
 
 # poalim usage: iconv -f iso8859-8 2015-03-30-2015-06-30.xls |  ./mizrachi-parse.coffee poalim-checking
 
@@ -90,13 +112,12 @@ process.stdin.on 'end', ->
                 if mode=='isracard' and (charge.payee and charge.payee.match datergs[mode])
                         #throw "argh! isracard type two; '"+(charge.date.match charge.payee)+"'"
                         charge = transform $, dts, isracard_abroad_trans
-
                 dateres = charge.date.match datergs[mode] if charge.date
                 if dateres
-                        if mode in ['mizrahi-credit','isracard']
+                        if mode in ['mizrahi-credit','isracard','leumi-credit']
                                 charge.local_amount=parseFloat(charge.local_amount.replace(',',''))*-1
                                 charge.amount=parseFloat(charge.amount.replace(',',''))*-1
-                        else if mode in ['poalim-checking','mizrahi-checking']
+                        else if mode in ['poalim-checking','mizrahi-checking','leumi-checking']
                                 if charge.withdrawal_amount
                                         charge.amount=parseFloat(charge.withdrawal_amount.replace(',',''))*-1
                                 else if charge.deposit_amount

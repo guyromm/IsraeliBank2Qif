@@ -3,6 +3,7 @@ If you happen to be a customer/user of
 - mizrahi-tefahot.co.il
 - bankhapoalim.co.il
 - isracard.co.il
+- bankleumi.co.il
 and you'd like to put your financial data using something more sensible, like Quicken or GnuCash - this script is for you.
 Has been tested and found to work with Mizrahi exported files from June 2015, and imported with GnuCash 2.6.1
 * Installation
@@ -23,6 +24,7 @@ cat ~/path/to/AccountActivity.xls | coffee xls2qif.coffee mizrahi-checking > Acc
   - בנק מזרחי טפחות
   - בנק הפועלים
   - ישראכרט
+  - בנק לאומי
 - הופך קבצי אקסל ל .qif
 - מאפשר לייבאם לתוך GnuCash או Quicken
 
